@@ -16,8 +16,12 @@ function App() {
                     <Route path="/alltools" element={<ToolsPage />} />
                     <Route path="/merge" element={<ToolsPage tool="merge" />} />
                     <Route path="/split" element={<ToolsPage tool="split" />} />
+                    <Route path="/pdf-to-markdown" element={<ToolsPage tool="markdown" />} />
                     <Route path="/compress" element={<ToolsPage tool="compress" />} />
-                    <Route path="/convert" element={<ToolsPage tool="convert" />} />
+                    <Route path="/pdf-to-word" element={<ToolsPage tool="word" />} />
+                    <Route path="/pdf-to-csv" element={<ToolsPage tool="csv" />} />
+                    <Route path="/pdf-to-jpg" element={<ToolsPage tool="jpg" />} />
+                    <Route path="/reorder" element={<ToolsPage tool="reorder" />} />
                 </Routes>
                 <Footer />
             </div>
