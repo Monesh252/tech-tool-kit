@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className="footer-section">
                     <h3 className="text-lg font-semibold mb-4">Product</h3>
                     <ul className="space-y-2">
-                        <li><Link to="/tools" className="text-gray-400 hover:text-white transition-colors duration-200">All Tools</Link></li>
+                        <li><Link to="/alltools" className="text-gray-400 hover:text-white transition-colors duration-200">All Tools</Link></li>
                         <li><Link to="/merge" className="text-gray-400 hover:text-white transition-colors duration-200">Merge PDF</Link></li>
                         <li><Link to="/split" className="text-gray-400 hover:text-white transition-colors duration-200">Split PDF</Link></li>
                         <li><Link to="/compress" className="text-gray-400 hover:text-white transition-colors duration-200">Compress PDF</Link></li>

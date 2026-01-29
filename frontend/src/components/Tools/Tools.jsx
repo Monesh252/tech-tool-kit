@@ -66,8 +66,87 @@ const tools = [
     icon: "🔀",
     path: "/reorder",
     color: "bg-indigo-400"
+  },
+  {
+    id: 9,
+    title: "Delete Pages PDF",
+    description: "Remove unwanted pages from PDF",
+    icon: "🗑️",
+    path: "/delete-pages",
+    color: "bg-red-500"
+  },
+  {
+  id: 10,
+    title: "Rotate PDF Pages",
+    description: "Rotate PDF pages left or right",
+    icon: "🔄",
+    path: "/rotate",
+    color: "bg-indigo-500"
+  },
+  {
+    id: 11,
+    title: "Watermark PDF",
+    description: "Add text watermark to PDF pages",
+    icon: "💧",
+    path: "/watermark",
+    color: "bg-blue-500"
+  },
+  {
+    id: 12,
+    title: "Protect PDF",
+    description: "Secure PDF with password protection",
+    icon: "🔒",
+    path: "/protect",
+    color: "bg-gray-600"
+  },
+  {
+  id: 13,
+    title: "Unlock PDF",
+    description: "Remove password protection",
+    icon: "🔓",
+    path: "/unlock",
+    color: "bg-green-500"
+  },
+  {
+    id: 13,
+    title: "Page Numbers",
+    description: "Add page numbers to PDF",
+    icon: "🔢",
+    path: "/page-numbers",
+    color: "bg-emerald-500",
+  },
+  {
+    id: 14,
+    title: "Extract Images",
+    description: "Extract all images from PDF",
+    path: "/extract-images",
+    icon: "🖼️",
+    color: "bg-pink-400"
+  },
+  {
+    id: 15,
+    title: "Extract Text",
+    description: "Extract all text from PDF",
+    path: "/extract-text",
+    icon: "📄",
+    color: "bg-blue-400"
+  },
+  {
+    id: 16,
+    title: "HTML to PDF",
+    description: "Convert HTML content to PDF",
+    path: "/html-to-pdf",
+    icon: "🌐",
+    color: "bg-black"
+  },
+  {
+    id: 17,
+    title: "URL to PDF",
+    description: "Convert a webpage into PDF",
+    path: "/url-to-pdf",
+    icon: "🌐",
+    color: "bg-gray-700"
   }
-
 ];
 
 const Tools = ({ limit }) => {
