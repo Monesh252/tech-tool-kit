@@ -1,10 +1,10 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigation from './components/Navigation/Navigation';
+import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import ToolsPage from './pages/ToolsPage';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Footer';
 import Completed from "./pages/completed";
 
 function App() {

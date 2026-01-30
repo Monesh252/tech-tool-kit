@@ -4,6 +4,8 @@ import Tools from "../components/Tools/Tools";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker?url";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 const ToolsPage = ({ tool }) => {
@@ -204,7 +206,7 @@ const ToolsPage = ({ tool }) => {
     formData.append("file", selectedFile);
 
     try {
-      const res = await fetch("http://localhost:8080/api/pdf/pages", {
+      const res = await fetch(`${API_BASE}/api/pdf/pages`, {
         method: "POST",
         body: formData,
       });
@@ -251,7 +253,7 @@ const ToolsPage = ({ tool }) => {
 
     if (tool === "htmlToPdf") {
       if (!htmlContent.trim()) {
-        alert("Please enter HTML content");
+        alert("Please enter valid HTML");
         return;
       }
 
@@ -262,12 +264,14 @@ const ToolsPage = ({ tool }) => {
       formData.append("text", htmlContent);
 
       try {
-        const res = await fetch("http://localhost:8080/api/pdf/process", {
+        console.log("Sending HTML to backend...");
+
+        const res = await fetch(`${API_BASE}/api/pdf/process`, {
           method: "POST",
           body: formData,
         });
 
-        if (!res.ok) throw new Error("PDF processing failed");
+        if (!res.ok) throw new Error("HTML to PDF failed");
 
         const blob = await res.blob();
         download(blob, "html-to-pdf");
@@ -278,8 +282,9 @@ const ToolsPage = ({ tool }) => {
         setLoading(false);
       }
 
-      return; // ⛔ CRITICAL
+      return;
     }
+
 
     if (tool === "urlToPdf") {
       if (!htmlContent.trim()) {
@@ -291,10 +296,15 @@ const ToolsPage = ({ tool }) => {
 
       const formData = new FormData();
       formData.append("format", "url-to-pdf");
-      formData.append("text", htmlContent);
+      let url = htmlContent.trim();
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+          url = "https://" + url;
+        }
+        formData.append("text", url);
+
 
       try {
-        const res = await fetch("http://localhost:8080/api/pdf/process", {
+        const res = await fetch(`${API_BASE}/api/pdf/process`, {
           method: "POST",
           body: formData,
         });
@@ -343,9 +353,7 @@ const ToolsPage = ({ tool }) => {
     }
     // 🔹 ALL OTHER TOOLS → single file
     else if (
-      tool !== "htmlToPdf" &&
-      tool !== "extractText" &&
-      tool !== "extractImages"
+      tool !== "htmlToPdf"
     ) {
       formData.append("file", file);
     }
@@ -398,7 +406,7 @@ const ToolsPage = ({ tool }) => {
 
 
     try {
-      const res = await fetch("http://localhost:8080/api/pdf/process", {
+      const res = await fetch(`${API_BASE}/api/pdf/process`, {
         method: "POST",
         body: formData,
       });
@@ -472,7 +480,7 @@ const ToolsPage = ({ tool }) => {
             onChange={handleFileSelect}
           />
 
-          <div className="bg-white p-12 rounded-xl shadow-lg border-2 border-dashed">
+          <div className="bg-white p-12 rounded-xl shadow-lg border-2 border-dashed relative z-10">
             <div className="text-6xl mb-6">{config.icon}</div>
 
             {tool !== "htmlToPdf" && tool !== "urlToPdf" && (
@@ -965,9 +973,10 @@ const ToolsPage = ({ tool }) => {
             )}
 
             <button
+              type="button"
               onClick={processPdf}
               disabled={loading}
-              className="mt-6 bg-blue-600 text-white px-10 py-3 rounded-lg font-bold hover:bg-blue-700 disabled:bg-gray-400"
+              className="relative z-20 mt-6 bg-blue-600 text-white px-10 py-3 rounded-lg font-bold"
             >
               {loading ? "Processing..." : config.button}
             </button>
