@@ -15,10 +15,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Product</h4>
             <ul className="space-y-2">
-              <li><Link to="/tools" className="text-gray-300 hover:text-white">All Tools</Link></li>
-              <li><Link to="/tools/merge" className="text-gray-300 hover:text-white">Merge PDF</Link></li>
-              <li><Link to="/tools/split" className="text-gray-300 hover:text-white">Split PDF</Link></li>
-              <li><Link to="/tools/compress" className="text-gray-300 hover:text-white">Compress PDF</Link></li>
+              <li><Link to="/alltools" className="text-gray-300 hover:text-white">All Tools</Link></li>
+              <li><Link to="/merge" className="text-gray-300 hover:text-white">Merge PDF</Link></li>
+              <li><Link to="/split" className="text-gray-300 hover:text-white">Split PDF</Link></li>
+              <li><Link to="/compress" className="text-gray-300 hover:text-white">Compress PDF</Link></li>
             </ul>
           </div>
           <div>
