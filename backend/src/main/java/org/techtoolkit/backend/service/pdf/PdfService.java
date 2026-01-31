@@ -606,24 +606,41 @@ public class PdfService {
     public byte[] urlToPdf(String url) throws Exception {
 
         try (Playwright playwright = Playwright.create()) {
+
             Browser browser = playwright.chromium().launch(
-                    new BrowserType.LaunchOptions().setHeadless(true)
+                    new BrowserType.LaunchOptions()
+                            .setHeadless(true)
+                            .setArgs(List.of(
+                                    "--no-sandbox",
+                                    "--disable-setuid-sandbox",
+                                    "--disable-dev-shm-usage",
+                                    "--disable-gpu"
+                            ))
             );
 
-            BrowserContext context = browser.newContext();
+            BrowserContext context = browser.newContext(
+                    new Browser.NewContextOptions()
+                            .setViewportSize(1280, 1024)
+            );
+
             Page page = context.newPage();
 
             page.navigate(url, new Page.NavigateOptions()
-                    .setWaitUntil(WaitUntilState.NETWORKIDLE));
+                    .setTimeout(60_000)               // ⬅ IMPORTANT
+                    .setWaitUntil(WaitUntilState.LOAD)
+            );
 
-            byte[] pdfBytes = page.pdf(new Page.PdfOptions()
-                    .setFormat("A4")
-                    .setPrintBackground(true));
+            byte[] pdf = page.pdf(
+                    new Page.PdfOptions()
+                            .setFormat("A4")
+                            .setPrintBackground(true)
+            );
 
             browser.close();
-            return pdfBytes;
+            return pdf;
         }
     }
+
 
     private Color hexToColor(String hex) {
         if (hex == null || hex.isEmpty()) return Color.BLACK;
