@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import Tools from "../components/Tools/Tools";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker?url";
+import { useNavigate } from "react-router-dom";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
@@ -10,6 +11,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 const ToolsPage = ({ tool }) => {
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
 
   // File handling
   const [files, setFiles] = useState([]);
@@ -460,7 +462,7 @@ const ToolsPage = ({ tool }) => {
     URL.revokeObjectURL(url);
 
     setTimeout(() => {
-      window.location.href = "/completed";
+      navigate("/completed");
     }, 500);
   };
 
