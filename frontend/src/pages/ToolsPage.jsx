@@ -484,6 +484,7 @@ const ToolsPage = ({ tool }) => {
                   onChange={handleFileSelect}
                 />
 
+                {/* Show file upload for most tools */}
                 {tool !== "htmlToPdf" && tool !== "urlToPdf" && (
                   <div className="space-y-6">
                     <div className="text-center">
@@ -588,58 +589,62 @@ const ToolsPage = ({ tool }) => {
                         </div>
                       </div>
                     )}
+                  </div>
+                )}
 
-                    {/* URL to PDF */}
-                    {tool === "urlToPdf" && (
-                      <div className="space-y-4">
-                        <label className="block font-semibold text-gray-800">
-                          Enter Website URL
-                        </label>
-                        <div className="relative">
-                          <div className="absolute left-3 top-3 text-gray-400">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                            </svg>
-                          </div>
-                          <input
-                            type="url"
-                            value={htmlContent}
-                            onChange={(e) => setHtmlContent(e.target.value)}
-                            placeholder="https://example.com"
-                            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
-                          />
+                {/* Show URL input specifically for URL-to-PDF */}
+                {tool === "urlToPdf" && (
+                  <div className="space-y-6">
+                    <div className="space-y-4">
+                      <label className="block font-semibold text-gray-800">
+                        Enter Website URL
+                      </label>
+                      <div className="relative">
+                        <div className="absolute left-3 top-3 text-gray-400">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                          </svg>
                         </div>
-                        <p className="text-sm text-gray-500">
-                          Page will be rendered exactly as in browser
-                        </p>
+                        <input
+                          type="url"
+                          value={htmlContent}
+                          onChange={(e) => setHtmlContent(e.target.value)}
+                          placeholder="https://example.com"
+                          className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                        />
                       </div>
-                    )}
+                      <p className="text-sm text-gray-500">
+                        Page will be rendered exactly as in browser
+                      </p>
+                    </div>
+                  </div>
+                )}
 
-                    {/* HTML to PDF */}
-                    {tool === "htmlToPdf" && (
-                      <div className="space-y-4">
-                        <label className="block font-semibold text-gray-800">
-                          Paste HTML Code
-                        </label>
-                        <div className="relative">
-                          <div className="absolute left-3 top-3 text-gray-400">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                            </svg>
-                          </div>
-                          <textarea
-                            rows={12}
-                            value={htmlContent}
-                            onChange={(e) => setHtmlContent(e.target.value)}
-                            placeholder="<html><body><h1>Hello PDF</h1></body></html>"
-                            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
-                          />
+                {/* Show HTML input specifically for HTML-to-PDF */}
+                {tool === "htmlToPdf" && (
+                  <div className="space-y-6">
+                    <div className="space-y-4">
+                      <label className="block font-semibold text-gray-800">
+                        Paste HTML Code
+                      </label>
+                      <div className="relative">
+                        <div className="absolute left-3 top-3 text-gray-400">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                          </svg>
                         </div>
-                        <p className="text-sm text-gray-500">
-                          Full HTML supported (inline CSS allowed)
-                        </p>
+                        <textarea
+                          rows={12}
+                          value={htmlContent}
+                          onChange={(e) => setHtmlContent(e.target.value)}
+                          placeholder="<html><body><h1>Hello PDF</h1></body></html>"
+                          className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                        />
                       </div>
-                    )}
+                      <p className="text-sm text-gray-500">
+                        Full HTML supported (inline CSS allowed)
+                      </p>
+                    </div>
                   </div>
                 )}
 
@@ -984,16 +989,43 @@ const ToolsPage = ({ tool }) => {
                       <span className="text-gray-600">Tool</span>
                       <span className="font-semibold text-gray-900">{config.title}</span>
                     </div>
-                    {file && (
+                    
+                    {/* Show file info for file-based tools */}
+                    {tool !== "htmlToPdf" && tool !== "urlToPdf" && file && (
                       <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                         <span className="text-gray-600">File</span>
                         <span className="font-semibold text-gray-900 truncate max-w-[150px]">{file.name}</span>
                       </div>
                     )}
+                    
+                    {/* Show URL/HTML content info for those tools */}
+                    {tool === "urlToPdf" && htmlContent && (
+                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <span className="text-gray-600">URL</span>
+                        <span className="font-semibold text-gray-900 truncate max-w-[150px]">{htmlContent}</span>
+                      </div>
+                    )}
+                    
+                    {tool === "htmlToPdf" && htmlContent && (
+                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <span className="text-gray-600">HTML Content</span>
+                        <span className="font-semibold text-gray-900 truncate max-w-[150px]">
+                          {htmlContent.length > 20 ? `${htmlContent.substring(0, 20)}...` : htmlContent}
+                        </span>
+                      </div>
+                    )}
+                    
                     {totalPages && (
                       <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                         <span className="text-gray-600">Pages</span>
                         <span className="font-semibold text-gray-900">{totalPages}</span>
+                      </div>
+                    )}
+                    
+                    {tool === "merge" && files.length > 0 && (
+                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <span className="text-gray-600">Files to Merge</span>
+                        <span className="font-semibold text-gray-900">{files.length}</span>
                       </div>
                     )}
                   </div>
